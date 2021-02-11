@@ -498,7 +498,6 @@ ANN_QC_7 <- data.frame(
 
 # source("c:/users/louis/google drive/personal projects/covid data/data analysis.r", echo=T)
 # ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
-print("Hello there!")
 #cumulative(type = c("cases", "active"), region = "Quebec")
-new(type = c("cases", "deaths"), region = "Ontario", avgLen = 1)
+new(type = c("cases", "deaths"), region = "Quebec", avgLen = 7)
 
