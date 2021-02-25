@@ -6,7 +6,7 @@ All data is obtained from the Government of Canada's website: https://www.canada
 
 ## Example plots
 #### Canada (updated Feb. 25, 2021)
-![](https://github.com/louis-hildebrand/COVID-Graphs/blob/master/Canada%20example.png)
+![](https://github.com/louis-hildebrand/COVID-Graphs/blob/master/Example%20graphs/Canada%207-day%20daily%20cases%20(2021-02-25).png)
 
 #### Quebec (updated Feb. 25, 2021)
-![](https://github.com/louis-hildebrand/COVID-Graphs/blob/master/Quebec%20example.png)
+![](https://github.com/louis-hildebrand/COVID-Graphs/blob/master/Example%20graphs/Quebec%207-day%20daily%20cases%20(2021-02-25).png)
