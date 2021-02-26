@@ -20,7 +20,7 @@ The following libraries are required:
 *** Important ***
 In src/main.r, you must change the value of home_dir to point to the root of the project directory.
 
-Two functions are provided for producing the plots:
+Two functions are provided for producing the plots. Call them at the very end of main.r.
 ```
 plot_cumulative(type, region = "CANADA", period = c(as.POSIXct("2020-03-11"), RAW_DATA[nrow(RAW_DATA), "date"]), logScale = F, annotations = NULL)
     Plots the cumulative confirmed+probable cases and/or deaths
