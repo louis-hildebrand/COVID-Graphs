@@ -1,4 +1,5 @@
-setwd("c:/users/louis/google drive/personal projects/covid data")
+home_dir <- "c:/users/louis/google drive/personal projects/covid data"
+setwd(home_dir)
 
 library(ggplot2)
 library(reshape2)
@@ -13,22 +14,21 @@ getNew <- T								# Should it check for new data on the Government website?
 DATE_FORMAT <- "%d-%m-%Y"
 
 # Prepare data
-source("data-preparation.r")
+source("src/data-preparation.r")
 
 # Define utility functions and plotting functions
-source("utility.r")
-source("cumulative-plot.r")
-source("new-plot.r")
+source("src/utility.r")
+source("src/plot-cumulative.r")
+source("src/plot-new.r")
 
 # Define annotations (old, only for Quebec)
-source("annotations.r")
+source("src/annotations.r")
 
 
 
 
 
-# source("c:/users/louis/google drive/personal projects/covid data/main.r", echo=T)
 # ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
-#cumulative(type = c("cases", "active"), region = "Quebec")
-new(type = c("cases", "deaths"), region = "Quebec", avgLen = 7)
+# plot_cumulative(type = c("cases", "active"), region = "Quebec")
+plot_new(type = c("cases", "deaths"), region = "Quebec", avgLen = 7)
 

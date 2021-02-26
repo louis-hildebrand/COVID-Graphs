@@ -20,6 +20,5 @@ if (!file.exists("covid19.csv")) {
 		print("Data is up to date!")
 	}
 }
-Sys.sleep(2)
 RAW_DATA$date <- as.POSIXct(RAW_DATA$date, format = DATE_FORMAT)
 RAW_DATA$prname <- toupper(RAW_DATA$prname)

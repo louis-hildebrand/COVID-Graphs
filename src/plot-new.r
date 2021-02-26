@@ -5,7 +5,7 @@
 # avgLen: number of days over which to calculate the running average
 # annotate: if TRUE, the graph will be overlayed with important government policies
 # correct: if TRUE, Quebec's 1317 extra cases on May 3 will be distribted from April 2 to 30 (proportionally to the recorded number of new cases in Quebec on each day)
-new <- function(type, region = "CANADA", period = c(RAW_DATA[1, "date"], RAW_DATA[nrow(RAW_DATA), "date"]), avgLen = 1, annotate = NULL, correct = F)
+plot_new <- function(type, region = "CANADA", period = c(RAW_DATA[1, "date"], RAW_DATA[nrow(RAW_DATA), "date"]), avgLen = 1, annotate = NULL, correct = F)
 {
 	# Input validation
 		# type

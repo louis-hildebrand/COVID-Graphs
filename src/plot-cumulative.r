@@ -4,7 +4,7 @@
 # period: vector with the desired starting and ending dates (inclusive, formatted as yyyy-mm-dd) or blank for no restriction
 # logScale: if TRUE, the graph's y-axis will be on a log scale
 # annotate: if TRUE, the graph will be overlayed with important government policies
-cumulative <- function(type, region = "CANADA", period = c(as.POSIXct("2020-03-11"), RAW_DATA[nrow(RAW_DATA), "date"]), logScale = F, annotate = NULL)
+plot_cumulative <- function(type, region = "CANADA", period = c(as.POSIXct("2020-03-11"), RAW_DATA[nrow(RAW_DATA), "date"]), logScale = F, annotate = NULL)
 {
 	# Input validation
 		# type
