@@ -1,10 +1,12 @@
 # Plots the cumulative confirmed+probable cases and/or deaths
-# type: "cases", "deaths", "active", and/or "recovered"
-# region: province name or "CANADA"
-# period: vector with the desired starting and ending dates (inclusive, formatted as yyyy-mm-dd) or blank for no restriction
-# logScale: if TRUE, the graph's y-axis will be on a log scale
-# annotate: if TRUE, the graph will be overlayed with important government policies
-plot_cumulative <- function(type, region = "CANADA", period = c(as.POSIXct("2020-03-11"), RAW_DATA[nrow(RAW_DATA), "date"]), logScale = F, annotate = NULL)
+# 
+# type: 		a character vector with "cases", "deaths", "active", and/or "recovered"
+# region: 		province name or "CANADA"
+# period: 		vector with the desired starting and ending dates (inclusive, formatted as POSIXct) or blank for no restriction
+# logScale: 	if TRUE, the graph's y-axis will be on a log scale
+# annotations: 	optional data frame of annotations to add to the plot. Examples of the format are given in annotations.r.
+#
+plot_cumulative <- function(type, region = "CANADA", period = c(as.POSIXct("2020-03-11"), RAW_DATA[nrow(RAW_DATA), "date"]), logScale = F, annotations = NULL)
 {
 	# Input validation
 		# type
@@ -48,26 +50,26 @@ plot_cumulative <- function(type, region = "CANADA", period = c(as.POSIXct("2020
 	}
 	if (class(logScale) != "logical")
 	{
-		stop(paste0("_logScale_ must be logical. Current class is ", class(annotate)))
+		stop(paste0("_logScale_ must be logical. Current class is ", class(annotations)))
 	}
-		# annotate
-	if (!is.null(annotate))
+		# annotations
+	if (!is.null(annotations))
 	{
-		if (class(annotate) != "data.frame" || ncol(annotate) != 4)
+		if (class(annotations) != "data.frame" || ncol(annotations) != 4)
 		{
-			stop("_annotate_ must be a data frame with exactly 4 columns")
+			stop("_annotations_ must be a data frame with exactly 4 columns")
 		}
-		if (!inherits(annotate[, 2], "POSIXct"))
+		if (!inherits(annotations[, 2], "POSIXct"))
 		{
-			stop("Column 2 in _annotate_ must contain only POSIXct dates")
+			stop("Column 2 in _annotations_ must contain only POSIXct dates")
 		}
-		if (!all(is.numeric(annotate[, 3])))
+		if (!all(is.numeric(annotations[, 3])))
 		{
-			stop("Column 3 in _annotate_ must contain only numeric y-coordinates")
+			stop("Column 3 in _annotations_ must contain only numeric y-coordinates")
 		}
-		if (!all(is.logical(annotate[, 4])))
+		if (!all(is.logical(annotations[, 4])))
 		{
-			stop("Column 4 in _annotate_ must contain only boolean values")
+			stop("Column 4 in _annotations_ must contain only boolean values")
 		}
 	}
 	
@@ -158,9 +160,9 @@ plot_cumulative <- function(type, region = "CANADA", period = c(as.POSIXct("2020
 			plot.subtitle = element_text(size = 12, face = "italic")
 		)
 	
-	if (!is.null(annotate))
+	if (!is.null(annotations))
 	{
-		graph <- addAnnotations(graph, annotate)
+		graph <- addAnnotations(graph, annotations)
 	}
 	
 	print(graph)
