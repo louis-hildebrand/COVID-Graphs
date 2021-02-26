@@ -17,7 +17,7 @@ The following libraries are required:
 * reshape2:   https://www.rdocumentation.org/packages/reshape2
 * stringr:    https://www.rdocumentation.org/packages/stringr
 
-*** Important ***
+***___Important___***
 In src/main.r, you must change the value of home_dir to point to the root of the project directory.
 
 Two functions are provided for producing the plots. Call them at the very end of main.r.
