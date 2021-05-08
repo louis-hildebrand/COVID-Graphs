@@ -1,4 +1,4 @@
-home_dir <- "c:/users/louis/google drive/personal projects/covid data"
+home_dir <- "c:/users/louis/projects/covid data"
 setwd(home_dir)
 
 library(ggplot2)
