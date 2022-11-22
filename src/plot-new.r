@@ -33,7 +33,8 @@ plot_new <- function(type, region = "CANADA", period = c(RAW_DATA[1, "date"], RA
 	}
 	if (!(region %in% levels(factor(RAW_DATA$prname))))
 	{
-		stop(paste0(region, " is not a valid region. The valid regions are: ", paste(levels(factor(RAW_DATA$prname)), sep = ", ")))
+		validRegions <- paste(levels(factor(RAW_DATA$prname)), sep = "", collapse = ", ")
+		stop(paste0(region, " is not a valid region. The valid regions are: ", validRegions))
 	}
 		# period
 	if (length(period) != 2)
@@ -93,24 +94,24 @@ plot_new <- function(type, region = "CANADA", period = c(RAW_DATA[1, "date"], RA
 	
 	# Get relevant data from RAW_DATA
 	columns <- "date"
-	if ("CASES" %in% type) { columns <- c(columns, "numtotal") }
+	if ("CASES" %in% type) { columns <- c(columns, "totalcases") }
 	if ("DEATHS" %in% type) { columns <- c(columns, "numdeaths") }
 	
 	pr_dat <- RAW_DATA[RAW_DATA$prname == region, columns]
 	# Re-distribute the 1317 cases on May 3 from April 2 to 30
 	if (correct)
 	{
-		dailyCases <- runAvg(pr_dat[, c("date", "numtotal")], 1)[pr_dat$date >= as.POSIXct("2020-04-02", format = "%Y-%m-%d") & pr_dat$date <= as.POSIXct("2020-04-30", format = "%Y-%m-%d")]
+		dailyCases <- runAvg(pr_dat[, c("date", "totalcases")], 1)[pr_dat$date >= as.POSIXct("2020-04-02", format = "%Y-%m-%d") & pr_dat$date <= as.POSIXct("2020-04-30", format = "%Y-%m-%d")]
 		extraCases <- 1317/sum(dailyCases, na.rm = T) * dailyCases
 		dayList <- seq(from = as.POSIXct("2020-04-02", format = "%Y-%m-%d"), to = as.POSIXct("2020-05-02", format = "%Y-%m-%d"), by = "1 day")
 		daysToAdjust <- seq(from = as.POSIXct("2020-04-02", format = "%Y-%m-%d"), to = as.POSIXct("2020-05-02", format = "%Y-%m-%d"), by = "1 day")
 		for (i in 1:length(daysToAdjust))
 		{
 			day <- daysToAdjust[i]
-			pr_dat[pr_dat$date == day, "numtotal"] <- pr_dat[pr_dat$date == day, "numtotal"] + sum(extraCases[1:(1 + difftime(day, as.POSIXct("2020-04-02", format = "%Y-%m-%d"), units = "days"))], na.rm = T)
+			pr_dat[pr_dat$date == day, "totalcases"] <- pr_dat[pr_dat$date == day, "totalcases"] + sum(extraCases[1:(1 + difftime(day, as.POSIXct("2020-04-02", format = "%Y-%m-%d"), units = "days"))], na.rm = T)
 		}
 	}
-	if ("CASES" %in% type) { pr_dat <- cbind(pr_dat, Cases = runAvg(pr_dat[, c("date", "numtotal")], avgLen)) }
+	if ("CASES" %in% type) { pr_dat <- cbind(pr_dat, Cases = runAvg(pr_dat[, c("date", "totalcases")], avgLen)) }
 	if ("DEATHS" %in% type) { pr_dat <- cbind(pr_dat, Deaths = runAvg(pr_dat[, c("date", "numdeaths")], avgLen)) }
 	dat <- pr_dat[pr_dat$date >= period[1] & pr_dat$date <= period[2],]
 	

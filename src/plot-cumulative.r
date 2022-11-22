@@ -79,7 +79,7 @@ plot_cumulative <- function(type, region = "CANADA", period = c(as.POSIXct("2020
 	colours <- vector()
 	if ("CASES" %in% type)
 	{
-		columns <- c(columns, "numtotal")
+		columns <- c(columns, "totalcases")
 		column_names <- c(column_names, "Total Cases")
 		colours <- c(colours, COL_CASES)
 	}

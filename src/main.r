@@ -1,11 +1,11 @@
-home_dir <- "c:/users/louis/projects/covid data"
+home_dir <- "c:/users/louis/projects/personal/covid data"
 setwd(home_dir)
 
 library(ggplot2)
 library(reshape2)
 library(stringr)
 
-options(scipen = 999, tz = "EST")		# Pevent the use of scientific notation (e.g. in log scale plots) and set time zone
+options(scipen = 999, tz = "EST", max.print = 10000)
 COL_CASES <- "darkblue"					# Colour for total/daily cases
 COL_ACTIVE <- "deepskyblue"				# Colour for active cases
 COL_DEATHS <- "red2"					# Colour for deaths
@@ -48,13 +48,12 @@ source("src/annotations.r")
 # 		period: 		vector with the desired starting and ending dates (inclusive, formatted as POSIXct) or blank for no restriction
 # 		avgLen: 		number of days over which to calculate the running average
 # 		annotations: 	optional data frame of annotations to add to the plot. Examples of the format are given in annotations.r.
-# 		correct: 		if TRUE, Quebec's 1317 extra cases on May 3 will be distribted from April 2 to 30 (proportionally to the recorded number of new cases in Quebec on each day)
+# 		correct: 		if TRUE, Quebec's 1317 extra cases on May 3 will be distributed from April 2 to 30 (proportionally to the recorded number of new cases in Quebec on each day)
 # ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
 
 
 
 
 
-# plot_cumulative(type = c("cases", "active"), region = "Quebec")
+# plot_cumulative(type = c("cases", "deaths"), region = "Quebec")
 plot_new(type = c("cases", "deaths"), region = "Quebec", avgLen = 7)
-
